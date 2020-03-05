@@ -1,0 +1,105 @@
+<html>
+<head>
+<link rel="stylesheet" th:href="@{webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<form id="formulario" th:action="@{/pessoa}">
+			<div class="form-group">
+				<label>Nome</label>
+				<input class="form-control" name="nome">
+				<div class="invalid-feedback">
+		     	</div>
+			</div>
+			<div class="form-group">
+				<label for="nome">Sexo</label>
+				<select class="form-control" name="sexo">
+			      	<option value="HOMEM">Homem</option>
+			      	<option value="MULHER">Mulher</option>
+			    </select>
+			    <div class="invalid-feedback">
+		     	</div>
+			</div>
+			<div class="form-group">
+				<label>Data de Nascimento</label>
+				<input type="date" class="form-control" name="dataDeNascimento">
+				<div class="invalid-feedback">
+		     	</div>
+			</div>
+			<div class="form-group">
+				<label>Naturalidade</label>
+				<input class="form-control" name="naturalidade">
+				<div class="invalid-feedback">
+		     	</div>
+			</div>
+			<div class="form-group">
+				<label>Nacionalidade</label>
+				<input class="form-control" name="nacionalidade">
+				<div class="invalid-feedback">
+		     	</div>
+			</div>
+			<div class="form-group">
+				<label>E-mail</label>
+				<input type="email" class="form-control" name="email">
+				<div class="invalid-feedback">
+		     	</div>
+			</div>
+			<div class="form-group">
+				<label>Cpf</label>
+				<input class="form-control" name="cpf">
+				<div class="invalid-feedback">
+		     	</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</body>
+<script>
+	var formulario = document.querySelector("#formulario");
+	
+	formulario.addEventListener("submit", function(e){
+	    e.preventDefault();
+		
+	    var dados = Object.values(formulario).reduce((obj,field) => { obj[field.name] = field.value; return obj }, {})
+	    
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("POST", "/rest/pessoa", true);
+	    xhr.setRequestHeader('Content-Type', 'application/json');
+	    xhr.send(JSON.stringify(dados));
+	    
+	    xhr.onreadystatechange = function () {
+	        if (this.readyState != 4) return;
+	        
+	        limpaMensagensDeErro();
+	        
+	        if(this.status == 409) {
+	        	var resposta = JSON.parse(this.responseText);
+	        	for(let atributoComErro in resposta) {
+	        		adicionaMensagemDeErro(atributoComErro, resposta[atributoComErro]);
+	        	}
+	        }
+
+	        if (this.status == 200) {
+	            var data = JSON.parse(this.responseText);
+				alert("Cadastro efetuado com sucesso.")
+				formulario.reset();
+	        }
+
+	    };
+	});
+	
+	function limpaMensagensDeErro() {
+		var inputs = formulario.querySelectorAll(".form-control");
+		[].forEach.call(inputs, function(el) {
+		    el.classList.remove("is-invalid");
+		});
+	}
+	
+	function adicionaMensagemDeErro(atributo, erro) {
+		formulario.querySelector('input[name="'+atributo+'"]').classList.add('is-invalid');
+		formulario.querySelector('input[name="'+atributo+'"] ~ div').innerHTML = erro;
+		
+	}
+	
+</script>
+</html>
