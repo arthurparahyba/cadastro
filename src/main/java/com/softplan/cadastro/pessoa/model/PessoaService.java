@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.softplan.cadastro.pessoa.model.Pessoa.PessoaBuilder;
+import com.softplan.cadastro.pessoa.model.validator.ValidadorDeCadastroDePessoa;
 
 @Service
 public class PessoaService {

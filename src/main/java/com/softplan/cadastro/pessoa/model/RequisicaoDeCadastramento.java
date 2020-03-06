@@ -3,19 +3,53 @@ package com.softplan.cadastro.pessoa.model;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public interface RequisicaoDeCadastramento {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
-	String getNome();
+import org.hibernate.validator.constraints.br.CPF;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class RequisicaoDeCadastramento{
+
+	@NotEmpty
+	private String nome;
 	
-	Optional<Sexo> getSexo();
+	private Sexo sexo;
 	
-	LocalDate getDataDeNascimento();
+	@NotNull
+	@PastOrPresent
+	private LocalDate dataDeNascimento;
 	
-	Optional<String> getNaturalidade();
+	private String naturalidade;
 	
-	Optional<String> getNacionalidade();
+	private String nacionalidade;
 	
-	Optional<String> getEmail();
+	@Email
+	private String email;
 	
-	String getCpf();
+	@NotEmpty
+	@CPF
+	private String cpf;
+
+	public Optional<Sexo> getSexo() {
+		return Optional.ofNullable(sexo);
+	}
+
+	public Optional<String> getNaturalidade() {
+		return Optional.ofNullable(naturalidade);
+	}
+
+	public Optional<String> getNacionalidade() {
+		return Optional.ofNullable(nacionalidade);
+	}
+
+	public Optional<String> getEmail() {
+		return Optional.ofNullable(email);
+	}
 }

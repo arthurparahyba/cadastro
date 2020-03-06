@@ -1,7 +1,17 @@
 package com.softplan.cadastro.pessoa.model;
 
-public interface RequisicaoDeAtualizacao extends RequisicaoDeCadastramento{
+import javax.validation.constraints.NotNull;
 
-	Long getId();
-	
+import com.softplan.cadastro.pessoa.model.validator.PessoaExistenteValidator;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class RequisicaoDeAtualizacao extends RequisicaoDeCadastramento{
+
+	@NotNull
+	@PessoaExistenteValidator
+	private Long id;
 }

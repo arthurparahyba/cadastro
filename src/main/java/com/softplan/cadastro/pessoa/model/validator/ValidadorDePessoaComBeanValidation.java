@@ -1,4 +1,4 @@
-package com.softplan.cadastro.pessoa.validator;
+package com.softplan.cadastro.pessoa.model.validator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,34 +11,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.softplan.cadastro.pessoa.model.DetalheDoErro;
-import com.softplan.cadastro.pessoa.model.LogicaDeNegocioException;
 import com.softplan.cadastro.pessoa.model.RequisicaoDeAtualizacao;
 import com.softplan.cadastro.pessoa.model.RequisicaoDeCadastramento;
 import com.softplan.cadastro.pessoa.model.RequisicaoPorId;
-import com.softplan.cadastro.pessoa.model.ValidadorDeCadastroDePessoa;
-import com.softplan.cadastro.pessoa.validator.exception.ErroDeValidacaoException;
-import com.softplan.cadastro.pessoa.validator.exception.RegistroNaoEncontradoException;
+import com.softplan.cadastro.pessoa.model.exception.ErroDeValidacaoException;
+import com.softplan.cadastro.pessoa.model.exception.RegistroNaoEncontradoException;
 
 @Component
-public class ValidadorDePessoaComBeanValidator implements ValidadorDeCadastroDePessoa {
+public class ValidadorDePessoaComBeanValidation implements ValidadorDeCadastroDePessoa {
 
 	@Autowired
 	private Validator validator;
 	
 	@Override
-	public void valida(RequisicaoDeCadastramento cadastro) throws LogicaDeNegocioException {
+	public void valida(RequisicaoDeCadastramento cadastro) {
 		Set<ConstraintViolation<RequisicaoDeCadastramento>> erros = validator.validate(cadastro);
 		trataConstraints(erros.stream().collect(Collectors.toSet()));
 	}
 	
 	@Override
-	public void valida(RequisicaoDeAtualizacao atualizacao) throws LogicaDeNegocioException {
+	public void valida(RequisicaoDeAtualizacao atualizacao) {
 		Set<ConstraintViolation<RequisicaoDeAtualizacao>> erros = validator.validate(atualizacao);
 		trataConstraints(erros.stream().collect(Collectors.toSet()));
 	}
 	
 	@Override
-	public void valida(RequisicaoPorId requisicao) throws LogicaDeNegocioException {
+	public void valida(RequisicaoPorId requisicao) {
 		Set<ConstraintViolation<RequisicaoPorId>> erros = validator.validate(requisicao);
 		if(!erros.isEmpty()) {
 			throw new RegistroNaoEncontradoException();

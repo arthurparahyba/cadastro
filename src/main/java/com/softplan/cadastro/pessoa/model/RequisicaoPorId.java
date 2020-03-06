@@ -1,6 +1,20 @@
 package com.softplan.cadastro.pessoa.model;
 
-public interface RequisicaoPorId {
+import javax.validation.constraints.NotNull;
 
-	Long getId();
+import com.softplan.cadastro.pessoa.model.validator.PessoaExistenteValidator;
+
+import lombok.Getter;
+
+@Getter
+public class RequisicaoPorId {
+
+	@NotNull
+	@PessoaExistenteValidator
+	private final Long id;
+	
+	public RequisicaoPorId(Long id) {
+		this.id = id;
+	}
+
 }

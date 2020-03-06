@@ -3,6 +3,7 @@ package com.softplan.cadastro.pessoa.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import com.softplan.cadastro.pessoa.model.validator.PessoaExistenteValidator;
 import com.softplan.cadastro.pessoa.repository.PessoaDAO;
 
 public class PessoaExistenteComJPAValidator implements ConstraintValidator<PessoaExistenteValidator, Long>{

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.softplan.cadastro.pessoa.model.DetalheDoErro;
 import com.softplan.cadastro.pessoa.model.Pessoa;
 import com.softplan.cadastro.pessoa.model.PessoaRepository;
-import com.softplan.cadastro.pessoa.validator.exception.ErroDeValidacaoException;
+import com.softplan.cadastro.pessoa.model.exception.ErroDeValidacaoException;
 
 @Repository
 public class PessoaRepositoryComSpringData implements PessoaRepository {

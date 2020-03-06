@@ -1,9 +1,11 @@
-package com.softplan.cadastro.pessoa.model;
+package com.softplan.cadastro.pessoa.model.exception;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class LogicaDeNegocioException extends RuntimeException {
+import com.softplan.cadastro.pessoa.model.DetalheDoErro;
+
+public abstract class LogicaDeNegocioException extends RuntimeException {
 
 	private Set<DetalheDoErro> erros = new HashSet<>();
 	

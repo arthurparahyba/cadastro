@@ -1,4 +1,4 @@
-package com.softplan.cadastro.pessoa.validator.exception;
+package com.softplan.cadastro.pessoa.rest;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.softplan.cadastro.pessoa.model.exception.RegistroNaoEncontradoException;
 
 @ControllerAdvice
 public class ExceptionHandlerRegistroNaoEncontrado extends ResponseEntityExceptionHandler {

@@ -1,10 +1,9 @@
-package com.softplan.cadastro.pessoa.validator.exception;
+package com.softplan.cadastro.pessoa.model.exception;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import com.softplan.cadastro.pessoa.model.DetalheDoErro;
-import com.softplan.cadastro.pessoa.model.LogicaDeNegocioException;
 
 public class ErroDeValidacaoException extends LogicaDeNegocioException {
 
