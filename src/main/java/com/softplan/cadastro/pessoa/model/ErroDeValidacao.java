@@ -1,4 +1,4 @@
-package com.softplan.cadastro.pessoa.modelo;
+package com.softplan.cadastro.pessoa.model;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

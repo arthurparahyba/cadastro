@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.softplan.cadastro.pessoa.modelo.ErroDeValidacaoException;
-import com.softplan.cadastro.pessoa.modelo.Pessoa;
-import com.softplan.cadastro.pessoa.modelo.PessoaService;
-import com.softplan.cadastro.pessoa.modelo.RequisicaoDeRemocao;
+import com.softplan.cadastro.pessoa.model.ErroDeValidacaoException;
+import com.softplan.cadastro.pessoa.model.Pessoa;
+import com.softplan.cadastro.pessoa.model.PessoaService;
+import com.softplan.cadastro.pessoa.model.RequisicaoDeRemocao;
 
 @RestController
 @RequestMapping(path="/rest/pessoa")

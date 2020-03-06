@@ -10,9 +10,9 @@ import javax.validation.constraints.PastOrPresent;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.softplan.cadastro.pessoa.modelo.RequisicaoDeAtualizacao;
-import com.softplan.cadastro.pessoa.modelo.RequisicaoDeCadastramento;
-import com.softplan.cadastro.pessoa.modelo.Sexo;
+import com.softplan.cadastro.pessoa.model.RequisicaoDeAtualizacao;
+import com.softplan.cadastro.pessoa.model.Sexo;
+import com.softplan.cadastro.pessoa.validator.PessoaExistenteValidator;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +22,7 @@ import lombok.Setter;
 public class RequisicaoDeAtualizacaoComRest implements RequisicaoDeAtualizacao{
 
 	@NotNull
+	@PessoaExistenteValidator
 	private Long id;
 	
 	@NotEmpty

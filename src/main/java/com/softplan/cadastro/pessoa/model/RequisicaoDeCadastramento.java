@@ -1,4 +1,4 @@
-package com.softplan.cadastro.pessoa.modelo;
+package com.softplan.cadastro.pessoa.model;
 
 import java.time.LocalDate;
 import java.util.Optional;

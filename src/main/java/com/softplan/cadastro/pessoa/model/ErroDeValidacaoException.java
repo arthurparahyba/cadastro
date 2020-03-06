@@ -1,9 +1,7 @@
-package com.softplan.cadastro.pessoa.modelo;
+package com.softplan.cadastro.pessoa.model;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.validation.ConstraintViolation;
 
 public class ErroDeValidacaoException extends Exception {
 

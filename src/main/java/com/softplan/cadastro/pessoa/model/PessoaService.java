@@ -1,11 +1,11 @@
-package com.softplan.cadastro.pessoa.modelo;
+package com.softplan.cadastro.pessoa.model;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.softplan.cadastro.pessoa.modelo.Pessoa.PessoaBuilder;
+import com.softplan.cadastro.pessoa.model.Pessoa.PessoaBuilder;
 
 @Service
 public class PessoaService {
@@ -20,9 +20,9 @@ public class PessoaService {
 		return repository.lista();
 	}
 	
-	public Pessoa cadastra(RequisicaoDeCadastramento novo) throws ErroDeValidacaoException{
-		validador.valida(novo);
-		Pessoa.PessoaBuilder builder = preencheDadosDePessoa(novo);
+	public Pessoa cadastra(RequisicaoDeCadastramento requisicao) throws ErroDeValidacaoException{
+		validador.valida(requisicao);
+		Pessoa.PessoaBuilder builder = preencheDadosDePessoa(requisicao);
 		Pessoa pessoa = builder.build();
 		
 		return repository.salva(pessoa);

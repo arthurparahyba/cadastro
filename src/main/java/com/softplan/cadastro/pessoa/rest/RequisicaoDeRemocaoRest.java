@@ -2,7 +2,8 @@ package com.softplan.cadastro.pessoa.rest;
 
 import javax.validation.constraints.NotNull;
 
-import com.softplan.cadastro.pessoa.modelo.RequisicaoDeRemocao;
+import com.softplan.cadastro.pessoa.model.RequisicaoDeRemocao;
+import com.softplan.cadastro.pessoa.validator.PessoaExistenteValidator;
 
 import lombok.Getter;
 
@@ -10,6 +11,7 @@ import lombok.Getter;
 public class RequisicaoDeRemocaoRest implements RequisicaoDeRemocao {
 
 	@NotNull
+	@PessoaExistenteValidator
 	private final Long id;
 	
 	public RequisicaoDeRemocaoRest(Long id) {

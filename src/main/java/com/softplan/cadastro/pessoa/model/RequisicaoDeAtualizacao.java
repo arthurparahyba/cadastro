@@ -1,4 +1,4 @@
-package com.softplan.cadastro.pessoa.modelo;
+package com.softplan.cadastro.pessoa.model;
 
 public interface RequisicaoDeAtualizacao extends RequisicaoDeCadastramento{
 

@@ -7,13 +7,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.softplan.cadastro.pessoa.modelo.RequisicaoDeAtualizacao;
-import com.softplan.cadastro.pessoa.modelo.RequisicaoDeCadastramento;
-import com.softplan.cadastro.pessoa.modelo.Sexo;
+import com.softplan.cadastro.pessoa.model.RequisicaoDeCadastramento;
+import com.softplan.cadastro.pessoa.model.Sexo;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,4 @@
-package com.softplan.cadastro.pessoa.modelo;
-
-import com.softplan.cadastro.pessoa.rest.RequisicaoDeCadastramentoComRest;
+package com.softplan.cadastro.pessoa.model;
 
 public interface ValidadorDeCadastroDePessoa {
 

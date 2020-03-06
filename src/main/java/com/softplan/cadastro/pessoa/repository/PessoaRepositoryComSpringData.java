@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
-import com.softplan.cadastro.pessoa.modelo.ErroDeValidacao;
-import com.softplan.cadastro.pessoa.modelo.ErroDeValidacaoException;
-import com.softplan.cadastro.pessoa.modelo.Pessoa;
-import com.softplan.cadastro.pessoa.modelo.PessoaRepository;
+import com.softplan.cadastro.pessoa.model.ErroDeValidacao;
+import com.softplan.cadastro.pessoa.model.ErroDeValidacaoException;
+import com.softplan.cadastro.pessoa.model.Pessoa;
+import com.softplan.cadastro.pessoa.model.PessoaRepository;
 
 @Repository
 public class PessoaRepositoryComSpringData implements PessoaRepository {
