@@ -2,10 +2,10 @@ package com.softplan.cadastro.pessoa.model;
 
 public interface ValidadorDeCadastroDePessoa {
 
-	void valida(RequisicaoDeCadastramento pessoa) throws ErroDeValidacaoException;
+	void valida(RequisicaoDeCadastramento pessoa) throws LogicaDeNegocioException;
 
-	void valida(RequisicaoDeAtualizacao atualizacao) throws ErroDeValidacaoException;
+	void valida(RequisicaoDeAtualizacao atualizacao) throws LogicaDeNegocioException;
 
-	void valida(RequisicaoDeRemocao remove) throws ErroDeValidacaoException;
+	void valida(RequisicaoPorId remove) throws LogicaDeNegocioException;
 
 }

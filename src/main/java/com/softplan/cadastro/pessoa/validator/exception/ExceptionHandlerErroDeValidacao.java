@@ -1,4 +1,4 @@
-package com.softplan.cadastro.pessoa.rest;
+package com.softplan.cadastro.pessoa.validator.exception;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.softplan.cadastro.pessoa.model.ErroDeValidacaoException;
-
 @ControllerAdvice
-public class ErroDeValidacaoExceptionHandler extends ResponseEntityExceptionHandler {
+public class ExceptionHandlerErroDeValidacao extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(ErroDeValidacaoException.class)
 	protected ResponseEntity<Object> handleConflict(ErroDeValidacaoException ex, WebRequest request) {

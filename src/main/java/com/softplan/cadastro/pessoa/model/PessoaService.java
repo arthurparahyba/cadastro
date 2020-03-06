@@ -20,7 +20,7 @@ public class PessoaService {
 		return repository.lista();
 	}
 	
-	public Pessoa cadastra(RequisicaoDeCadastramento requisicao) throws ErroDeValidacaoException{
+	public Pessoa cadastra(RequisicaoDeCadastramento requisicao){
 		validador.valida(requisicao);
 		Pessoa.PessoaBuilder builder = preencheDadosDePessoa(requisicao);
 		Pessoa pessoa = builder.build();
@@ -28,12 +28,17 @@ public class PessoaService {
 		return repository.salva(pessoa);
 	}
 	
-	public void remove(RequisicaoDeRemocao requisicao) throws ErroDeValidacaoException {
+	public Pessoa busca(RequisicaoPorId requisicao){
+		validador.valida(requisicao);
+		return repository.buscaPorId(requisicao.getId()).get();
+	}
+	
+	public void remove(RequisicaoPorId requisicao){
 		validador.valida(requisicao);
 		repository.remove(requisicao.getId());
 	}
 	
-	public Pessoa atualiza(RequisicaoDeAtualizacao atualizacao) throws ErroDeValidacaoException {
+	public Pessoa atualiza(RequisicaoDeAtualizacao atualizacao){
 		validador.valida(atualizacao);
 		
 		Pessoa existente = repository.buscaPorId(atualizacao.getId()).get();
@@ -45,8 +50,6 @@ public class PessoaService {
 		Pessoa atualizada = pessoaBuilder.build();
 		return repository.salva(atualizada);
 	}
-
-	
 
 	private Pessoa.PessoaBuilder preencheDadosDePessoa(RequisicaoDeCadastramento novo) {
 		Pessoa.PessoaBuilder builder = Pessoa.builder();
@@ -72,5 +75,5 @@ public class PessoaService {
 		}
 		return builder;
 	}
-	
+
 }

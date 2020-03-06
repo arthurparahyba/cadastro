@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
-import com.softplan.cadastro.pessoa.model.ErroDeValidacao;
-import com.softplan.cadastro.pessoa.model.ErroDeValidacaoException;
+import com.softplan.cadastro.pessoa.model.DetalheDoErro;
 import com.softplan.cadastro.pessoa.model.Pessoa;
 import com.softplan.cadastro.pessoa.model.PessoaRepository;
+import com.softplan.cadastro.pessoa.validator.exception.ErroDeValidacaoException;
 
 @Repository
 public class PessoaRepositoryComSpringData implements PessoaRepository {
@@ -37,10 +37,10 @@ public class PessoaRepositoryComSpringData implements PessoaRepository {
 			return dao.save(pessoa);
 		} catch (DataIntegrityViolationException e) {
 			if(erroDeCPFUnico(e)) {
-				ErroDeValidacao erro = new ErroDeValidacao("cpf", "Já existe um cadastro associado com este CPF");
+				DetalheDoErro erro = new DetalheDoErro("cpf", "Já existe um cadastro associado com este CPF");
 				throw new ErroDeValidacaoException(erro);
 			}
-			ErroDeValidacao erro = new ErroDeValidacao("generico", "Erro no cadastramento");
+			DetalheDoErro erro = new DetalheDoErro("generico", "Erro no cadastramento");
 			throw new ErroDeValidacaoException(erro);
 		}
 	}

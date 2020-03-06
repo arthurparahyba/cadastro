@@ -1,4 +1,4 @@
-package com.softplan.cadastro.pessoa.rest;
+package com.softplan.cadastro.pessoa.validator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,12 +10,14 @@ import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.softplan.cadastro.pessoa.model.ErroDeValidacao;
-import com.softplan.cadastro.pessoa.model.ErroDeValidacaoException;
+import com.softplan.cadastro.pessoa.model.DetalheDoErro;
+import com.softplan.cadastro.pessoa.model.LogicaDeNegocioException;
 import com.softplan.cadastro.pessoa.model.RequisicaoDeAtualizacao;
 import com.softplan.cadastro.pessoa.model.RequisicaoDeCadastramento;
-import com.softplan.cadastro.pessoa.model.RequisicaoDeRemocao;
+import com.softplan.cadastro.pessoa.model.RequisicaoPorId;
 import com.softplan.cadastro.pessoa.model.ValidadorDeCadastroDePessoa;
+import com.softplan.cadastro.pessoa.validator.exception.ErroDeValidacaoException;
+import com.softplan.cadastro.pessoa.validator.exception.RegistroNaoEncontradoException;
 
 @Component
 public class ValidadorDePessoaComBeanValidator implements ValidadorDeCadastroDePessoa {
@@ -24,36 +26,38 @@ public class ValidadorDePessoaComBeanValidator implements ValidadorDeCadastroDeP
 	private Validator validator;
 	
 	@Override
-	public void valida(RequisicaoDeCadastramento cadastro) throws ErroDeValidacaoException {
+	public void valida(RequisicaoDeCadastramento cadastro) throws LogicaDeNegocioException {
 		Set<ConstraintViolation<RequisicaoDeCadastramento>> erros = validator.validate(cadastro);
 		trataConstraints(erros.stream().collect(Collectors.toSet()));
 	}
 	
 	@Override
-	public void valida(RequisicaoDeAtualizacao atualizacao) throws ErroDeValidacaoException {
+	public void valida(RequisicaoDeAtualizacao atualizacao) throws LogicaDeNegocioException {
 		Set<ConstraintViolation<RequisicaoDeAtualizacao>> erros = validator.validate(atualizacao);
 		trataConstraints(erros.stream().collect(Collectors.toSet()));
 	}
 	
 	@Override
-	public void valida(RequisicaoDeRemocao remocao) throws ErroDeValidacaoException {
-		Set<ConstraintViolation<RequisicaoDeRemocao>> erros = validator.validate(remocao);
-		trataConstraints(erros.stream().collect(Collectors.toSet()));
+	public void valida(RequisicaoPorId requisicao) throws LogicaDeNegocioException {
+		Set<ConstraintViolation<RequisicaoPorId>> erros = validator.validate(requisicao);
+		if(!erros.isEmpty()) {
+			throw new RegistroNaoEncontradoException();
+		}
 	}
 	
 	private void trataConstraints(Set<ConstraintViolation> constrains) throws ErroDeValidacaoException {
-		Set<ErroDeValidacao> errosDeValidacao = toErrosDeValidacao(constrains);
+		Set<DetalheDoErro> errosDeValidacao = toErrosDeValidacao(constrains);
 
 		if(!errosDeValidacao.isEmpty()) {
 			throw new ErroDeValidacaoException(errosDeValidacao);
 		}
 	}
 
-	private Set<ErroDeValidacao> toErrosDeValidacao(Set<ConstraintViolation> erros) {
-		Set<ErroDeValidacao> errosDeValidacao = new HashSet<>();
+	private Set<DetalheDoErro> toErrosDeValidacao(Set<ConstraintViolation> erros) {
+		Set<DetalheDoErro> errosDeValidacao = new HashSet<>();
 		if(!erros.isEmpty()) {
 			errosDeValidacao = erros.stream()
-				.map(erro -> new ErroDeValidacao(erro.getPropertyPath().toString(), erro.getMessage()))
+				.map(erro -> new DetalheDoErro(erro.getPropertyPath().toString(), erro.getMessage()))
 				.collect(Collectors.toSet());
 		}
 		return errosDeValidacao;

@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor
-public class ErroDeValidacao {
+public class DetalheDoErro {
 	private final String atributo;
 	private final String causa;
 }
